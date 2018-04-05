@@ -129,7 +129,7 @@ yacc.yacc()
 
 while 1:
     try:
-        s = raw_input('calc > ')
+        s = input('calc > ')
     except EOFError:
         break
     if not s:
