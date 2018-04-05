@@ -17,12 +17,13 @@ reserved = {
     'for': 'FOR',
     'while': 'WHILE',
     'def': 'DEF',
+    'int':'INT'
 }
-tokenokens = tokens+list(reserved.values())
+tokens = tokens+list(reserved.values())
 # expression rule for token
 
 
-literals = ['+', '-', '*', '/', '(', ')']
+literals = ['+', '-', '*', '/', '(', ')','=']
 
 
 def t_ID(t):
@@ -43,7 +44,10 @@ def t_newline(t):
     return t
 
 def t_error(t):
-    print("Illegal character {0} at {1}").format(t.value[0], t.lineno)
+    try:
+        print("Illegal character {0} at {1}").format(t.value[0], t.lineno)
+    except:
+        print('NONE')
     t.lexer.skip(1)
     return t
 
@@ -54,17 +58,25 @@ t_ignore_BLANK = r'\s'
 
 ################################################################
 precedence = (
+    ('left','='),
     ('left', '+', '-'),
     ('left', '*', '/'),
     ('right', 'UMINUS')
 )  # shift/reduce?
 
 ids = {}
+#var -> ids={'var_name':'value'}
+
+def p_statement_INT(p):
+    'statement : INT ID '  #<--------this is a bug!!!
+    ids[p[2]] = None
+    print(ids)
 
 
 def p_statement_assign(p):
     'statement : ID "=" expression'
     ids[p[1]] = p[3]
+    print(ids)
 
 
 def p_statement_expr(p):
@@ -112,11 +124,13 @@ def p_expression_id(p):
 
 
 def p_error(p):
-    if p:
-        print("Syntax error at '%s'" % p.value)
-    else:
-        print("Syntax error at EOF")
-
+    try:
+        if p:
+            print("Syntax error at '%s'" % p.value)
+        else:
+            print("Syntax error at EOF")
+    except:
+        print("NONE")
 
 ################################################################
 lexer = lex.lex(debug=True)
@@ -126,7 +140,7 @@ lexer = lex.lex(debug=True)
 #     print tok
 
 yacc.yacc()
-
+# input the flow
 while 1:
     try:
         s = input('calc > ')
