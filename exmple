@@ -1,0 +1,307 @@
+c语言的文法产生式：
+ 
+programà
+      external_declaration
+     | program external_declaration
+ 
+external_declarationà
+     function_definition
+     | declaration
+    
+function_definitionà type_specifier declarator compound_statement
+ 
+type_specifierà
+     VOID
+     | CHAR
+     | INT
+     | FLOAT
+ 
+declarator
+     pointer direct_declarator
+     | direct_declarator
+ 
+Pointerà
+     '*'
+     | '*' pointer
+ 
+direct_declarator
+     IDENTIFIER
+  |direct_declarator’[‘ ‘]’
+     |direct_declarator ’[’ constant_expression ’]’
+     | IDENTIFIER '(' parameter_list ')'
+| IDENTIFIER '(' ')'
+     |direct_declarator  ‘,’  identifier_list
+ 
+identifier_list
+     : IDENTIFIER
+     | identifier_list ',' IDENTIFIER
+ 
+constant_expressionà
+     conditional_expression
+ 
+parameter_listà
+      parameter_declaration
+     | parameter_list ',' parameter_declaration
+
+parameter_declaration à
+     declaration_specifiers  IDENTIFIER
+ 
+compound_statementà
+      '{' '}'
+     | '{' statement_list '}'
+     | '{' declaration_list statement_list '}'
+ 
+declaration_listà
+      declaration
+     | declaration_list declaration
+ 
+Declarationà
+      init_declarator
+     | init_declarator_list ',' init_declarator
+ 
+init_declaratorà
+      declarator
+     | declarator '=' initializer
+ 
+Initializerà
+      assignment_expression
+     | '{' initializer_list '}'
+     | '{' initializer_list ',' '}'
+ 
+initializer_listà
+      initializer
+     | initializer_list ',' initializer
+ 
+statement_listà
+     statement
+     | statement_list statement
+ 
+Statementà
+     | compound_statement
+     | expression_statement
+     | selection_statement
+     | iteration_statement
+     | jump_statement
+ 
+expression_statementà
+     ';'
+     | expression ';'
+ 
+selection_statement
+     : IF '(' expression ')' statement
+     | IF '(' expression ')' statement ELSE statement
+ 
+iteration_statementà
+      WHILE '(' expression ')' statement
+     | FOR '(' expression_statement expression_statement ')' statement
+     | FOR '(' expression_statement expression_statement expression ')' statement
+ 
+jump_statement
+     | CONTINUE ';'
+     | BREAK ';'
+     | RETURN ';'
+     | RETURN expression ';'
+ 
+expression
+     : assignment_expression
+     | expression ',' assignment_expression
+ 
+assignment_expressionà
+     conditional_expression
+     | unary_expression assignment_operator assignment_expression
+ 
+conditional_expressionà
+      logical_or_expression
+     | logical_or_expression '?' expression ':' conditional_expression
+ 
+logical_or_expressionà
+     logical_and_expression
+     | logical_or_expression OR_OP logical_and_expression
+ 
+logical_and_expression
+     : inclusive_or_expression
+     | logical_and_expression AND_OP inclusive_or_expression
+ 
+inclusive_or_expressionà
+     exclusive_or_expression
+     | inclusive_or_expression '|' exclusive_or_expression
+ 
+exclusive_or_expression
+     : and_expression
+     | exclusive_or_expression '^' and_expression
+ 
+and_expression
+     : equality_expression
+     | and_expression '&' equality_expression
+ 
+equality_expression
+     : relational_expression
+     | equality_expression EQ_OP relational_expression
+     | equality_expression NE_OP relational_expression
+ 
+relational_expression
+     : shift_expression
+     | relational_expression '<' shift_expression
+     | relational_expression '>' shift_expression
+     | relational_expression LE_OP shift_expression
+     | relational_expression GE_OP shift_expression
+ 
+shift_expression
+     : additive_expression
+     | shift_expression LEFT_OP additive_expression
+     | shift_expression RIGHT_OP additive_expression
+ 
+additive_expression
+     : multiplicative_expression
+     | additive_expression '+' multiplicative_expression
+     | additive_expression '-' multiplicative_expression
+ 
+multiplicative_expression
+     : cast_expression
+     | multiplicative_expression '*' cast_expression
+     | multiplicative_expression '/' cast_expression
+     | multiplicative_expression '%' cast_expression
+ 
+cast_expression
+     : unary_expression
+     | '(' type_name ')' cast_expression
+ 
+unary_expression
+     : postfix_expression
+     | INC_OP unary_expression
+     | DEC_OP unary_expression
+     | unary_operator cast_expression
+     | SIZEOF unary_expression
+     | SIZEOF '(' type_name ')'
+ 
+postfix_expressionà
+     : primary_expression
+     | postfix_expression '[' expression ']'
+     | postfix_expression '(' ')'
+     | postfix_expression '(' argument_expression_list ')'
+     | postfix_expression '.' IDENTIFIER
+     | postfix_expression PTR_OP IDENTIFIER
+     | postfix_expression INC_OP
+     | postfix_expression DEC_OP
+ 
+primary_expressionà
+     IDENTIFIER
+     | CONSTANT
+     | STRING_LITERAL
+     | '(' expression ')'
+ 
+argument_expression_list
+     : assignment_expression
+     | argument_expression_list ',' assignment_expression
+ 
+unary_operator
+     : '&'
+     | '*'
+     | '+'
+     | '-'
+     | '~'
+     | '!'
+ 
+assignment_operatorà
+      '='
+     | MUL_ASSIGN
+     | DIV_ASSIGN
+     | MOD_ASSIGN
+     | ADD_ASSIGN
+     | SUB_ASSIGN
+     | LEFT_ASSIGN
+     | RIGHT_ASSIGN
+     | AND_ASSIGN
+     | XOR_ASSIGN
+     | OR_ASSIGN
+ 
+storage_class_specifierà
+      TYPEDEF
+     | EXTERN
+     | STATIC
+     | AUTO
+     | REGISTER
+ 
+struct_or_union_specifier
+     : struct_or_union IDENTIFIER '{' struct_declaration_list '}'
+     | struct_or_union '{' struct_declaration_list '}'
+     | struct_or_union IDENTIFIER
+ 
+struct_or_union
+     : STRUCT
+     | UNION
+ 
+struct_declaration_list
+     : struct_declaration
+     | struct_declaration_list struct_declaration
+ 
+struct_declaration
+     : specifier_qualifier_list struct_declarator_list ';'
+specifier_qualifier_listà
+      type_specifier specifier_qualifier_list
+     | type_specifier
+     | type_qualifier specifier_qualifier_list
+     | type_qualifier
+    
+struct_declarator_listà
+      struct_declarator
+     | struct_declarator_list ',' struct_declarator
+    
+struct_declaratorà
+     : declarator
+     | ':' constant_expression
+     | declarator ':' constant_expression
+    
+enum_specifierà
+      ENUM '{' enumerator_list '}'
+     | ENUM IDENTIFIER '{' enumerator_list '}'
+     | ENUM IDENTIFIER
+    
+enumerator_listà
+      enumerator
+     | enumerator_list ',' enumerator
+    
+Enumeratorà
+      IDENTIFIER
+     | IDENTIFIER '=' constant_expression
+    
+type_qualifierà
+      CONST
+     | VOLATILE
+    
+type_qualifier_listà
+      type_qualifier
+     | type_qualifier_list type_qualifier
+    
+parameter_type_listà
+      parameter_list
+     | parameter_list ',' ELLIPSIS
+    
+parameter_listà
+     : parameter_declaration
+     | parameter_list ',' parameter_declaration
+    
+type_nameà
+      specifier_qualifier_list
+     | specifier_qualifier_list abstract_declarator
+    
+abstract_declaratorà
+      pointer
+     | direct_abstract_declarator
+     | pointer direct_abstract_declarator
+    
+direct_abstract_declaratorà
+      '(' abstract_declarator ')'
+     | '[' ']'
+     | '[' constant_expression ']'
+     | direct_abstract_declarator '[' ']'
+     | direct_abstract_declarator '[' constant_expression ']'
+     | '(' ')'
+     | '(' parameter_type_list ')'
+     | direct_abstract_declarator '(' ')'
+     | direct_abstract_declarator '(' parameter_type_list ')'
+    
+labeled_statementà
+      IDENTIFIER ':' statement
+     | CASE constant_expression ':' statement
+     | DEFAULT ':' statement
