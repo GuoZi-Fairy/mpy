@@ -1,16 +1,16 @@
 c语言的文法产生式：
  
-programà
+program 
       external_declaration
      | program external_declaration
  
-external_declarationà
+external_declaration 
      function_definition
      | declaration
     
-function_definitionà type_specifier declarator compound_statement
+function_definition  type_specifier declarator compound_statement
  
-type_specifierà
+type_specifier 
      VOID
      | CHAR
      | INT
@@ -20,7 +20,7 @@ declarator
      pointer direct_declarator
      | direct_declarator
  
-Pointerà
+Pointer 
      '*'
      | '*' pointer
  
@@ -36,54 +36,54 @@ identifier_list
      : IDENTIFIER
      | identifier_list ',' IDENTIFIER
  
-constant_expressionà
+constant_expression 
      conditional_expression
  
-parameter_listà
+parameter_list 
       parameter_declaration
      | parameter_list ',' parameter_declaration
 
-parameter_declaration à
+parameter_declaration  
      declaration_specifiers  IDENTIFIER
  
-compound_statementà
+compound_statement 
       '{' '}'
      | '{' statement_list '}'
      | '{' declaration_list statement_list '}'
  
-declaration_listà
+declaration_list 
       declaration
      | declaration_list declaration
  
-Declarationà
+Declaration 
       init_declarator
      | init_declarator_list ',' init_declarator
  
-init_declaratorà
+init_declarator 
       declarator
      | declarator '=' initializer
  
-Initializerà
+Initializer 
       assignment_expression
      | '{' initializer_list '}'
      | '{' initializer_list ',' '}'
  
-initializer_listà
+initializer_list 
       initializer
      | initializer_list ',' initializer
  
-statement_listà
+statement_list 
      statement
      | statement_list statement
  
-Statementà
+Statement 
      | compound_statement
      | expression_statement
      | selection_statement
      | iteration_statement
      | jump_statement
  
-expression_statementà
+expression_statement 
      ';'
      | expression ';'
  
@@ -91,7 +91,7 @@ selection_statement
      : IF '(' expression ')' statement
      | IF '(' expression ')' statement ELSE statement
  
-iteration_statementà
+iteration_statement 
       WHILE '(' expression ')' statement
      | FOR '(' expression_statement expression_statement ')' statement
      | FOR '(' expression_statement expression_statement expression ')' statement
@@ -106,15 +106,15 @@ expression
      : assignment_expression
      | expression ',' assignment_expression
  
-assignment_expressionà
+assignment_expression 
      conditional_expression
      | unary_expression assignment_operator assignment_expression
  
-conditional_expressionà
+conditional_expression 
       logical_or_expression
      | logical_or_expression '?' expression ':' conditional_expression
  
-logical_or_expressionà
+logical_or_expression 
      logical_and_expression
      | logical_or_expression OR_OP logical_and_expression
  
@@ -122,7 +122,7 @@ logical_and_expression
      : inclusive_or_expression
      | logical_and_expression AND_OP inclusive_or_expression
  
-inclusive_or_expressionà
+inclusive_or_expression 
      exclusive_or_expression
      | inclusive_or_expression '|' exclusive_or_expression
  
@@ -174,7 +174,7 @@ unary_expression
      | SIZEOF unary_expression
      | SIZEOF '(' type_name ')'
  
-postfix_expressionà
+postfix_expression 
      : primary_expression
      | postfix_expression '[' expression ']'
      | postfix_expression '(' ')'
@@ -184,7 +184,7 @@ postfix_expressionà
      | postfix_expression INC_OP
      | postfix_expression DEC_OP
  
-primary_expressionà
+primary_expression 
      IDENTIFIER
      | CONSTANT
      | STRING_LITERAL
@@ -202,7 +202,7 @@ unary_operator
      | '~'
      | '!'
  
-assignment_operatorà
+assignment_operator 
       '='
      | MUL_ASSIGN
      | DIV_ASSIGN
@@ -215,7 +215,7 @@ assignment_operatorà
      | XOR_ASSIGN
      | OR_ASSIGN
  
-storage_class_specifierà
+storage_class_specifier 
       TYPEDEF
      | EXTERN
      | STATIC
@@ -237,60 +237,60 @@ struct_declaration_list
  
 struct_declaration
      : specifier_qualifier_list struct_declarator_list ';'
-specifier_qualifier_listà
+specifier_qualifier_list 
       type_specifier specifier_qualifier_list
      | type_specifier
      | type_qualifier specifier_qualifier_list
      | type_qualifier
     
-struct_declarator_listà
+struct_declarator_list 
       struct_declarator
      | struct_declarator_list ',' struct_declarator
     
-struct_declaratorà
+struct_declarator 
      : declarator
      | ':' constant_expression
      | declarator ':' constant_expression
     
-enum_specifierà
+enum_specifier 
       ENUM '{' enumerator_list '}'
      | ENUM IDENTIFIER '{' enumerator_list '}'
      | ENUM IDENTIFIER
     
-enumerator_listà
+enumerator_list 
       enumerator
      | enumerator_list ',' enumerator
     
-Enumeratorà
+Enumerator 
       IDENTIFIER
      | IDENTIFIER '=' constant_expression
     
-type_qualifierà
+type_qualifier 
       CONST
      | VOLATILE
     
-type_qualifier_listà
+type_qualifier_list 
       type_qualifier
      | type_qualifier_list type_qualifier
     
-parameter_type_listà
+parameter_type_list 
       parameter_list
      | parameter_list ',' ELLIPSIS
     
-parameter_listà
+parameter_list 
      : parameter_declaration
      | parameter_list ',' parameter_declaration
     
-type_nameà
+type_name 
       specifier_qualifier_list
      | specifier_qualifier_list abstract_declarator
     
-abstract_declaratorà
+abstract_declarator 
       pointer
      | direct_abstract_declarator
      | pointer direct_abstract_declarator
     
-direct_abstract_declaratorà
+direct_abstract_declarator 
       '(' abstract_declarator ')'
      | '[' ']'
      | '[' constant_expression ']'
@@ -301,7 +301,7 @@ direct_abstract_declaratorà
      | direct_abstract_declarator '(' ')'
      | direct_abstract_declarator '(' parameter_type_list ')'
     
-labeled_statementà
+labeled_statement 
       IDENTIFIER ':' statement
      | CASE constant_expression ':' statement
      | DEFAULT ':' statement

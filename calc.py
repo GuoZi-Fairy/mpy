@@ -23,7 +23,7 @@ tokens = tokens+list(reserved.values())
 # expression rule for token
 
 
-literals = ['+', '-', '*', '/', '(', ')','=']
+literals = ['+', '-', '*', '/', '(', ')','=','{','}','[',']',';']
 
 
 def t_ID(t):
@@ -77,10 +77,10 @@ def p_statement_assign(p):
     'statement : ID "=" expression'
     ids[p[1]] = p[3]
     print(ids)
-
+ 
 
 def p_statement_expr(p):
-    'statement : expression'
+    "statement : expression "
     print(p[1])
 
 
