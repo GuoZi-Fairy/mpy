@@ -6,7 +6,7 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'left=left+-left*/rightUMINUSDEF ELIF ELSE FOR ID IF INT NUMBER WHILEstatement : INT ID statement : ID "=" expressionstatement : expressionexpression : expression \'+\' expression \n                  | expression \'-\' expression \n                  | expression \'*\' expression \n                  | expression \'/\' expressionexpression : \'-\' expression %prec UMINUSexpression : \'(\' expression \')\'expression : NUMBERexpression : ID'
+_lr_signature = 'left=left+-left*/rightUMINUSDEF ELIF ELSE FOR ID IF INT NUMBER WHILEstatement : INT ID statement : ID "=" expressionstatement : expression expression : expression \'+\' expression \n                  | expression \'-\' expression \n                  | expression \'*\' expression \n                  | expression \'/\' expressionexpression : \'-\' expression %prec UMINUSexpression : \'(\' expression \')\'expression : NUMBERexpression : ID'
     
 _lr_action_items = {'INT':([0,],[2,]),'ID':([0,2,5,6,9,10,11,12,13,],[3,8,15,15,15,15,15,15,15,]),'-':([0,3,4,5,6,7,9,10,11,12,13,14,15,16,17,18,19,20,21,22,],[5,-11,11,5,5,-10,5,5,5,5,5,-8,-11,11,11,-4,-5,-6,-7,-9,]),'(':([0,5,6,9,10,11,12,13,],[6,6,6,6,6,6,6,6,]),'NUMBER':([0,5,6,9,10,11,12,13,],[7,7,7,7,7,7,7,7,]),'$end':([1,3,4,7,8,14,15,17,18,19,20,21,22,],[0,-11,-3,-10,-1,-8,-11,-2,-4,-5,-6,-7,-9,]),'=':([3,],[9,]),'+':([3,4,7,14,15,16,17,18,19,20,21,22,],[-11,10,-10,-8,-11,10,10,-4,-5,-6,-7,-9,]),'*':([3,4,7,14,15,16,17,18,19,20,21,22,],[-11,12,-10,-8,-11,12,12,12,12,-6,-7,-9,]),'/':([3,4,7,14,15,16,17,18,19,20,21,22,],[-11,13,-10,-8,-11,13,13,13,13,-6,-7,-9,]),')':([7,14,15,16,18,19,20,21,22,],[-10,-8,-11,22,-4,-5,-6,-7,-9,]),}
 
